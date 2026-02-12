@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposal</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(#ff99cc, #ffe6f0);
+    text-align: center;
+    color: white;
+}
+
+.phone {
+    width: 320px;
+    margin: 80px auto;
+    background: rgba(255,255,255,0.15);
+    padding: 30px;
+    border-radius: 25px;
+}
+
+button {
+    padding: 15px 25px;
+    font-size: 18px;
+    margin: 15px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#yes { background: #4CAF50; color:white; }
+#no { background: #ff4444; color:white; }
+
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh); opacity: 1; }
+    100% { transform: translateY(-10vh); opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Background Music -->
+<iframe width="0" height="0"
+src="https://www.youtube.com/embed/NO8u6cH9z_Q?autoplay=1&loop=1&playlist=NO8u6cH9z_Q"
+frameborder="0" allow="autoplay"></iframe>
+
+<div class="phone">
+
+<h2 id="question"></h2>
+
+<h3>Time left</h3>
+<h1 id="timer"></h1>
+
+<button id="yes" onclick="yesClick()">Haan Main Hoon</button>
+<button id="no" onmouseover="move()">Bilkul Bhi Nahi</button>
+
+<h3 id="message"></h3>
+
+</div>
+
+<script>
+
+/* ===== EDIT THESE ONLY ===== */
+
+let QUESTION_TEXT = "Hey Vinal! Kya tum pagal ho !!?";
+let SUCCESS_MESSAGE = "Everyone knows, it's you who's not accepting the facts.";
+let COUNTDOWN_SECONDS = 5;
+
+/* ============================ */
+
+document.getElementById("question").innerText = QUESTION_TEXT;
+
+let time = COUNTDOWN_SECONDS;
+document.getElementById("timer").innerText = time;
+
+let countdown = setInterval(() => {
+    time--;
+    document.getElementById("timer").innerText = time;
+    if(time <= 0){
+        clearInterval(countdown);
+        document.getElementById("timer").innerText = "";
+    }
+}, 1000);
+
+function move(){
+    let btn = document.getElementById("no");
+    btn.style.position = "absolute";
+    btn.style.left = Math.random() * window.innerWidth + "px";
+    btn.style.top = Math.random() * window.innerHeight + "px";
+}
+
+function yesClick(){
+    document.getElementById("message").innerText = SUCCESS_MESSAGE;
+}
+
+/* floating hearts */
+setInterval(()=>{
+    let heart = document.createElement("div");
+    heart.className="heart";
+    heart.innerHTML="❤";
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=Math.random()*30+20+"px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+},300);
+
+</script>
+
+</body>
+</html>
